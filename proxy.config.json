@@ -1,0 +1,11 @@
+{
+  "/api": {
+    "target": "https://test-api.live.gbksoft.net/rest",
+    "secure": false,
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
