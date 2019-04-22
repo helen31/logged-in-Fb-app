@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { map } from 'rxjs/operators';
-
 import { UserInterface } from '../shared/models/user.interface';
 
 @Injectable()
@@ -14,9 +12,7 @@ export class AuthService {
 
   login(userData: {username: string, password: string}) {
     const body = userData;
-    return this.httpClient.post<UserInterface>(location.origin + '/api/v1/user/login', body).pipe(
-        map(res => res.result)
-    );
+    return this.httpClient.post<UserInterface>(location.origin + '/api/v1/user/login', body);
   }
 
   setTokenToLst(token: string): void {
@@ -36,4 +32,5 @@ export class AuthService {
     this.router.navigate(['/login']);
     localStorage.removeItem('token'); // todo web-storage-service???
   }
+
 }

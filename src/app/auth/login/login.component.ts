@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { AuthService } from '../auth.service';
 import { UserInterface } from '../../shared/models/user.interface';
+import { WebStorageService } from '../../core/web-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private webStorageService: WebStorageService
   ) {}
 
 
@@ -27,8 +29,8 @@ export class LoginComponent implements OnInit {
 
   loginHandler() {
     const userData = {
-      username: this.loginForm.value.userData.user,
-      password: this.loginForm.value.userData.password
+      username: this.loginForm.value.userData.user.trim(),
+      password: this.loginForm.value.userData.password.trim()
     };
 
     this.errorMessage = false;
@@ -36,17 +38,17 @@ export class LoginComponent implements OnInit {
     // 'test2test2', 'test2test'
     this.authService.login(userData).subscribe(
         (responce: UserInterface) => {
-            console.log('responce', responce);
             const userCopy = Object.assign({}, responce);
 
-            this.authService.setTokenToLst(userCopy.token);
+            this.authService.setTokenToLst(userCopy.result.token);
+            this.webStorageService.setLoggedInUserIdToLst(userCopy.result.user_id);
             this.router.navigate(['/user']);
         },
         (error: HttpErrorResponse) => {
-          if (error.error.code === 422) {
-            this.errorMessage = true;
-            this.clearErrorMessage();
-          }
+            if (error.error.code === 422) {
+                this.errorMessage = true;
+                this.clearErrorMessage();
+            }
         }
     );
   }

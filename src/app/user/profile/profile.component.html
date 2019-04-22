@@ -1,3 +1,30 @@
-<p>
-  profile works!
-</p>
+<div>
+  <div class="profile__img">
+    <div class="img">
+      <img src="" alt="image">
+    </div>
+    <div class="action">
+      <button mat-button>Edit profile image</button>
+    </div>
+  </div>
+  <div class="profile__info">
+    <form [formGroup]="profileForm" (ngSubmit)="editProfileHandler()">
+      <mat-form-field>
+        <input matInput type="text" placeholder="First name" formControlName="first_name">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Last name" formControlName="last_name">
+      </mat-form-field>
+      <mat-radio-group formControlName="gender">
+        <mat-radio-button value="male">Male</mat-radio-button>
+        <mat-radio-button value="female">Female</mat-radio-button>
+      </mat-radio-group>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!isValidForm">
+        Edit profile
+      </button>
+    </form>
+  </div>
+  <div profile__navigate>
+    <button mat-button>Map</button>
+  </div>
+</div>
