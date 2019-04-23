@@ -9,7 +9,8 @@ import { ProfileResultInterface } from '../../shared/models/profile.interface';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  userList: ProfileResultInterface[];
+    userList: ProfileResultInterface[];
+    searchByName: string;
 
   constructor(private userService: UserService) {
     this.userService.getUserList().subscribe(

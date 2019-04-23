@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MyOwnCustomMaterialModule } from '../my-own-custom-material.module';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
-  declarations: [],
+  declarations: [FilterPipe],
   imports: [
     CommonModule,
     FormsModule,
@@ -15,7 +16,8 @@ import { MyOwnCustomMaterialModule } from '../my-own-custom-material.module';
   exports: [
     FormsModule,
     ReactiveFormsModule,
-    MyOwnCustomMaterialModule
+    MyOwnCustomMaterialModule,
+    FilterPipe
   ]
 })
 export class SharedModule { }
