@@ -7,14 +7,18 @@ import { ProfileComponent } from './profile/profile.component';
 import { UserLayoutComponent } from './user-layout/user-layout.component';
 import { UserRoutingModule } from './user-routing.module';
 import { UserService } from './user.service';
+import { ListComponent } from './list/list.component';
 
 
 @NgModule({
-  declarations: [ProfileComponent, UserLayoutComponent],
+  declarations: [
+      ProfileComponent,
+      UserLayoutComponent,
+      ListComponent],
   imports: [
-    CommonModule,
-    SharedModule,
-    UserRoutingModule
+      CommonModule,
+      SharedModule,
+      UserRoutingModule
   ],
   providers: [UserService]
 })
