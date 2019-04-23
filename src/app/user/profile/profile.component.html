@@ -1,10 +1,15 @@
 <div>
   <div class="profile__img">
     <div class="img">
-      <img src="" alt="image">
+      <img [src]="image ? image : './assets/img/no.png'" alt="image">
     </div>
-    <div class="action">
-      <button mat-button>Edit profile image</button>
+    <button mat-button type="button">
+      <label for="files">
+        <span class="btn-edit">Edit profile image</span>
+      </label>
+    </button>
+    <div>
+      <input id="files" type="file" accept="image/*" (change)="changeListener($event)" style="visibility:hidden;">
     </div>
   </div>
   <div class="profile__info">
@@ -25,6 +30,6 @@
     </form>
   </div>
   <div profile__navigate>
-    <button mat-button>Map</button>
+    <button mat-button>Go to the Map</button>
   </div>
 </div>

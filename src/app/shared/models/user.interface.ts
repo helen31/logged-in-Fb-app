@@ -1,4 +1,4 @@
-import {QueryResponseInterface} from './query-response.interface';
+import { QueryResponseInterface } from './query-response.interface';
 
 export interface UserInterface extends QueryResponseInterface {
     result: UserResultInterface;

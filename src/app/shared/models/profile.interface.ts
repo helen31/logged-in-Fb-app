@@ -4,7 +4,7 @@ export interface ProfileInterface extends QueryResponseInterface {
     result: ProfileResultInterface;
 }
 
-interface ProfileResultInterface {
+export interface ProfileResultInterface {
     id: number;
     username: string;
     country: string;

@@ -2,4 +2,18 @@
   width: 300px;
   height: 300px;
   border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.img img{
+  width: 100%;
+}
+.input-field{
+  padding: 5px;
+}
+.btn-edit{
+  vertical-align: middle;
+  cursor: pointer;
+  color: grey;
 }
