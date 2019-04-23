@@ -46,7 +46,6 @@ export class LoginComponent implements OnInit {
         },
         (error: HttpErrorResponse) => {
             if (error.error.code === 422) {
-                console.log('error,', error);
                 this.errorMessage = error.error.result[0].message;
                 this.clearErrorMessage();
             }

@@ -6,13 +6,13 @@
           <input matInput placeholder="User" text="text"  name="user" formControlName="user">
           <mat-error *ngIf="loginForm.controls.userData.controls.user.invalid && loginForm.controls.userData.controls.user.touched">
             <mat-error *ngIf="loginForm.controls.userData.get('user').errors?.required">
-              Поле обов'язкове.
+              User is required.
             </mat-error>
             <mat-error *ngIf="loginForm.controls.userData.get('user').errors?.minlength">
-              Ім'я має містити принаймні 2 символи.
+              User must be at least 4 characters long.
             </mat-error>
-            <mat-error *ngIf="signinForm.controls.userData.get('user').errors?.maxlength">
-              Ім'я не повинно перевищувати 255 символи.
+            <mat-error *ngIf="loginForm.controls.userData.get('user').errors?.maxlength">
+              User must not exceed 255 characters.
             </mat-error>
           </mat-error>
         </mat-form-field>
@@ -20,13 +20,13 @@
           <input matInput placeholder="Password" type="password" name="password" formControlName="password" [type]="hide ? 'password' : 'text'">
           <mat-error *ngIf="loginForm.controls.userData.controls.password.invalid && loginForm.controls.userData.controls.password.touched">
             <mat-error *ngIf="loginForm.controls.userData.get('password').errors?.required">
-              Поле обов'язкове.
+              Password is required.
             </mat-error>
             <mat-error *ngIf="loginForm.controls.userData.get('password').errors?.minlength">
-              Пароль має містити принаймні 2 символи.
+              Password must be at least 2 characters long.
             </mat-error>
             <mat-error *ngIf="loginForm.controls.userData.get('password').errors?.maxlength">
-              Пароль не повинен перевищувати 255 символи.
+              Password must not exceed 255 characters.
             </mat-error>
           </mat-error>
         </mat-form-field>
