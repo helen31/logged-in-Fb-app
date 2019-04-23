@@ -9,12 +9,12 @@ export class UserService {
     constructor(private httpClient: HttpClient) { }
 
     getUser(id: number) {
-    return this.httpClient.get<ProfileInterface>(location.origin + '/api/v1/user/' + id);
+        return this.httpClient.get<ProfileInterface>(location.origin + '/api/v1/user/' + id);
     }
 
     updateUser(profileData) {
-    const body = profileData;
-    return this.httpClient.put<ProfileInterface>(location.origin + '/api/v1/user/profile', body);
+        const body = profileData;
+        return this.httpClient.put<ProfileInterface>(location.origin + '/api/v1/user/profile', body);
     }
 
     createProfileData(dataObj): any {

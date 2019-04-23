@@ -14,7 +14,7 @@ import { WebStorageService } from '../../core/web-storage.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  errorMessage = false;
+  errorMessage: string = null;
 
   constructor(
     private authService: AuthService,
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.value.userData.password.trim()
     };
 
-    this.errorMessage = false;
+    this.errorMessage = null;
 
     // 'test2test2', 'test2test'
     this.authService.login(userData).subscribe(
@@ -46,7 +46,8 @@ export class LoginComponent implements OnInit {
         },
         (error: HttpErrorResponse) => {
             if (error.error.code === 422) {
-                this.errorMessage = true;
+                console.log('error,', error);
+                this.errorMessage = error.error.result[0].message;
                 this.clearErrorMessage();
             }
         }
@@ -64,7 +65,7 @@ export class LoginComponent implements OnInit {
 
   clearErrorMessage() {
     setTimeout(() => {
-      this.errorMessage = false;
+      this.errorMessage = null;
     }, 4000);
   }
 

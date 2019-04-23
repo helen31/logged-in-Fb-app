@@ -3,7 +3,7 @@
     <form [formGroup]="loginForm" (ngSubmit)="loginHandler()" class="form-login">
       <div formGroupName="userData">
         <mat-form-field>
-          <input matInput placeholder="Користувач" text="text"  name="user" formControlName="user">
+          <input matInput placeholder="User" text="text"  name="user" formControlName="user">
           <mat-error *ngIf="loginForm.controls.userData.controls.user.invalid && loginForm.controls.userData.controls.user.touched">
             <mat-error *ngIf="loginForm.controls.userData.get('user').errors?.required">
               Поле обов'язкове.
@@ -17,7 +17,7 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Пароль" type="password" name="password" formControlName="password" [type]="hide ? 'password' : 'text'">
+          <input matInput placeholder="Password" type="password" name="password" formControlName="password" [type]="hide ? 'password' : 'text'">
           <mat-error *ngIf="loginForm.controls.userData.controls.password.invalid && loginForm.controls.userData.controls.password.touched">
             <mat-error *ngIf="loginForm.controls.userData.get('password').errors?.required">
               Поле обов'язкове.
@@ -31,13 +31,13 @@
           </mat-error>
         </mat-form-field>
         <button mat-raised-button color="primary" type="submit"  class="login-button" [disabled]="!loginForm.valid">
-          Вхід
+          Log in
         </button>
       </div>
     </form>
   </div>
   <div>
-    <span i18n *ngIf="errorMessage">Неправильно вказано логін чи пароль.<br>Спробуйте знову.</span>
+    <span i18n *ngIf="errorMessage">{{ errorMessage }}</span>
   </div>
 </div>
 
