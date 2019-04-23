@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from '../shared/shared.module';
 import { LoginComponent } from './login/login.component';
 import { AuthRoutingModule } from './auth-routing.module';
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // todo move it in shared module
-import { MyOwnCustomMaterialModule } from '../my-own-custom-material.module'; // todo move it in shared module
 
 @NgModule({
   declarations: [
@@ -12,10 +10,8 @@ import { MyOwnCustomMaterialModule } from '../my-own-custom-material.module'; //
   ],
   imports: [
     CommonModule,
-    AuthRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MyOwnCustomMaterialModule //todo shared
+    SharedModule,
+    AuthRoutingModule
   ]
 })
 export class AuthModule { }

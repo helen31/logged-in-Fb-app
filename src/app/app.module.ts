@@ -1,13 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; //todo maybe in shared or core module
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { MyOwnCustomMaterialModule } from './my-own-custom-material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -17,12 +17,11 @@ import { MyOwnCustomMaterialModule } from './my-own-custom-material.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
+    SharedModule,
     HttpClientModule,
     AppRoutingModule,
     CoreModule,
-    MyOwnCustomMaterialModule
+    FlexLayoutModule //todo Find out maybe imclude in Shared module
   ],
   providers: [],
   bootstrap: [AppComponent]
