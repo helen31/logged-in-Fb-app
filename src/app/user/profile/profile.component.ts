@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 
 import { UserService } from '../user.service';
 import { ProfileInterface } from '../../shared/models/profile.interface';
-import { WebStorageService } from '../../core/web-storage.service';
 import { QueryResponseInterface } from '../../shared/models/query-response.interface';
 
 @Component({
@@ -14,7 +13,6 @@ import { QueryResponseInterface } from '../../shared/models/query-response.inter
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit, OnDestroy {
-    userId: number = null;
     profileForm: FormGroup;
     isValidForm = false;
     profileDataObj;
@@ -23,11 +21,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     constructor(
         private userService: UserService,
-        private webStorageService: WebStorageService,
         private formBuilder: FormBuilder
     ) {
-        this.userId = this.webStorageService.getLoggedInUserId();
-        this.getUser(this.userId);
+        this.getCurrentUser();
         this.createForm();
     }
 
@@ -52,16 +48,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.subscriptionProfile.unsubscribe();
   }
 
-  getUser(id: number): void {
-      this.userService.getUser(id).subscribe(
-          (response: ProfileInterface) => {
-              this.setNexProfileData(response.result);
-          },
-          (error) => {
-            console.log(error);
-          }
-      );
-  }
+    getCurrentUser(): void {
+        this.userService.getCurrentUser().subscribe(
+            (response: ProfileInterface) => {
+                this.setNexProfileData(response.result);
+            }, (error) => {
+                console.log(error);
+            }
+        );
+    }
 
     editProfileHandler(): void {
         const profileData = this.userService.createProfileData(this.profileForm.value);

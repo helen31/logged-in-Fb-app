@@ -22,6 +22,10 @@ export class UserService {
         return this.httpClient.get<ProfileInterface>(location.origin + '/api/v1/user/' + id);
     }
 
+    getCurrentUser() {
+        return this.httpClient.get<ProfileInterface>(location.origin + '/api/v1/user/current');
+    }
+
     getUserList() {
         return this.httpClient.get<ProfileInterface[]>(location.origin + '/api/v1/user');
     }

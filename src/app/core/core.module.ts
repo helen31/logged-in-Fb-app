@@ -26,7 +26,7 @@ import { FilterService } from '../shared/filter/filter.service';
   ],
   providers: [
     AuthService,
-    WebStorageService,
+    WebStorageService, // todo maybe remove it
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     FilterService
   ]
