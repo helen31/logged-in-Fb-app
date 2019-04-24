@@ -8,13 +8,15 @@ import { UserLayoutComponent } from './user-layout/user-layout.component';
 import { UserRoutingModule } from './user-routing.module';
 import { UserService } from './user.service';
 import { ListComponent } from './list/list.component';
+import { MapComponent } from './map/map.component';
 
 
 @NgModule({
   declarations: [
       ProfileComponent,
       UserLayoutComponent,
-      ListComponent],
+      ListComponent,
+      MapComponent],
   imports: [
       CommonModule,
       SharedModule,

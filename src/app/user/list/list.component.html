@@ -1,11 +1,6 @@
-
-<span class="filter">
-  <mat-icon  class="icon-search" svgIcon="search"></mat-icon>
-  <input [(ngModel)]="searchByName" placeholder="search..." autofocus>
-</span>
 <mat-list>
   <h3 mat-subheader>User list</h3>
-  <mat-list-item *ngFor="let user of userList | filter: 'username': searchByName">
+  <mat-list-item *ngFor="let user of userList | filter: 'username': searchText">
     <img mat-list-icon *ngIf="!user.image" src="./assets/img/no.png">
     <img mat-list-icon *ngIf="user.image" [src]="user.image" alt="img">
     <h3 class="name" mat-line>{{user.username}}</h3>

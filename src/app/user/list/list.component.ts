@@ -1,26 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+
+import { Subscription } from 'rxjs';
 
 import { UserService } from '../user.service';
-import { ProfileResultInterface } from '../../shared/models/profile.interface';
+import { ProfileInterface, ProfileResultInterface } from '../../shared/models/profile.interface';
+import { FilterService } from '../../shared/filter/filter.service';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnDestroy {
     userList: ProfileResultInterface[];
-    searchByName: string;
+    searchText: string;
+    subscriptionFilterValue: Subscription;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private filterService: FilterService) {
     this.userService.getUserList().subscribe(
-        (responce) => {
-          this.userList = responce.result; // todo make it observable stream
+        (response) => {
+          this.userList = response.result;
         }
     );
   }
 
   ngOnInit() {
+      this.subscriptionFilterValue = this.filterService.$filterValue.subscribe(
+          (value: string) => {
+              this.searchText = value;
+          }
+      );
+  }
+
+  ngOnDestroy() {
+      this.subscriptionFilterValue.unsubscribe();
   }
 
 }

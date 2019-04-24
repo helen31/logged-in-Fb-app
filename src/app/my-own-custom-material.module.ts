@@ -6,6 +6,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   imports: [
@@ -14,7 +16,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatFormFieldModule,
     MatRadioModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    MatToolbarModule, // todo remove?
+    MatMenuModule
   ],
   exports: [
     MatInputModule,
@@ -22,7 +26,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatFormFieldModule,
     MatRadioModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    MatToolbarModule,
+    MatMenuModule
   ]
 })
 

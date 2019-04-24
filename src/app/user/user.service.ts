@@ -23,7 +23,7 @@ export class UserService {
     }
 
     getUserList() {
-        return this.httpClient.get<ProfileResultInterface[]>(location.origin + '/api/v1/user');
+        return this.httpClient.get<ProfileInterface[]>(location.origin + '/api/v1/user');
     }
 
     updateUser(profileData) {
