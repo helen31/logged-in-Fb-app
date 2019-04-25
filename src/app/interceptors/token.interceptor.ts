@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { AuthService } from '../auth/auth.service';
 
@@ -14,6 +15,18 @@ export class TokenInterceptor implements HttpInterceptor {
         const authReq = req.clone({
             headers: req.headers.set('Authorization', `Bearer ${authToken}`)
         });
-        return next.handle(authReq);
+        return next.handle(authReq).pipe(
+            tap(
+                (succ) => {
+                    //console.log(succ);
+                },
+                (error) => {
+                    if (error.status === 401) {
+                        console.log('uncutigorize');
+                        this.authService.logout();
+                    }
+                }
+            )
+        );
     }
 }

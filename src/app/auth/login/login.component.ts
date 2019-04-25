@@ -5,7 +5,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { AuthService } from '../auth.service';
 import { UserInterface } from '../../shared/models/user.interface';
-import { WebStorageService } from '../../core/web-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -16,10 +15,11 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   errorMessage: string = null;
 
+
+
   constructor(
     private authService: AuthService,
-    private router: Router,
-    private webStorageService: WebStorageService
+    private router: Router
   ) {}
 
 
@@ -41,7 +41,6 @@ export class LoginComponent implements OnInit {
             const userCopy = Object.assign({}, responce);
 
             this.authService.setTokenToLst(userCopy.result.token);
-            this.webStorageService.setLoggedInUserIdToLst(userCopy.result.user_id);
             this.router.navigate(['/user']);
         },
         (error: HttpErrorResponse) => {
@@ -53,19 +52,21 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  createForm(): void {
-    this.loginForm = new FormGroup({
-        userData: new FormGroup({
-            user: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]),
-            password: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(255)])
-        })
-    });
-  }
+    createForm(): void {
+        this.loginForm = new FormGroup({
+            userData: new FormGroup({
+                user: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]),
+                password: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(255)])
+            })
+        });
+    }
 
-  clearErrorMessage() {
-    setTimeout(() => {
-      this.errorMessage = null;
-    }, 4000);
-  }
+    clearErrorMessage() {
+        setTimeout(() => {
+          this.errorMessage = null;
+        }, 4000);
+    }
+
+    logInWithFbHandler() {}
 
 }

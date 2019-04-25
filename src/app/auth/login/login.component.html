@@ -1,43 +1,43 @@
-<div>
-  <div>
-    <form [formGroup]="loginForm" (ngSubmit)="loginHandler()" class="form-login">
-      <div formGroupName="userData">
-        <mat-form-field>
-          <input matInput placeholder="User" text="text"  name="user" formControlName="user">
-          <mat-error *ngIf="loginForm.controls.userData.controls.user.invalid && loginForm.controls.userData.controls.user.touched">
-            <mat-error *ngIf="loginForm.controls.userData.get('user').errors?.required">
-              User is required.
-            </mat-error>
-            <mat-error *ngIf="loginForm.controls.userData.get('user').errors?.minlength">
-              User must be at least 4 characters long.
-            </mat-error>
-            <mat-error *ngIf="loginForm.controls.userData.get('user').errors?.maxlength">
-              User must not exceed 255 characters.
-            </mat-error>
+<div fxLayout="row" fxLayoutAlign="center center" class="container-login">
+  <form [formGroup]="loginForm" (ngSubmit)="loginHandler()" class="form-login">
+    <div class="form-content" formGroupName="userData" fxLayout="column" fxLayoutGap="15px">
+      <button mat-button type="button" (click)="logInWithFbHandler()">Log in with Facebook</button>
+      <mat-form-field>
+        <input matInput placeholder="User" text="text"  name="user" formControlName="user">
+        <mat-error *ngIf="loginForm.controls.userData.controls.user.invalid && loginForm.controls.userData.controls.user.touched">
+          <mat-error *ngIf="loginForm.controls.userData.get('user').errors?.required">
+            User is required.
           </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Password" type="password" name="password" formControlName="password" [type]="hide ? 'password' : 'text'">
-          <mat-error *ngIf="loginForm.controls.userData.controls.password.invalid && loginForm.controls.userData.controls.password.touched">
-            <mat-error *ngIf="loginForm.controls.userData.get('password').errors?.required">
-              Password is required.
-            </mat-error>
-            <mat-error *ngIf="loginForm.controls.userData.get('password').errors?.minlength">
-              Password must be at least 2 characters long.
-            </mat-error>
-            <mat-error *ngIf="loginForm.controls.userData.get('password').errors?.maxlength">
-              Password must not exceed 255 characters.
-            </mat-error>
+          <mat-error *ngIf="loginForm.controls.userData.get('user').errors?.minlength">
+            User must be at least 4 characters long.
           </mat-error>
-        </mat-form-field>
-        <button mat-raised-button color="primary" type="submit"  class="login-button" [disabled]="!loginForm.valid">
-          Log in
-        </button>
-      </div>
-    </form>
-  </div>
-  <div>
-    <span i18n *ngIf="errorMessage">{{ errorMessage }}</span>
-  </div>
+          <mat-error *ngIf="loginForm.controls.userData.get('user').errors?.maxlength">
+            User must not exceed 255 characters.
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Password" type="password" name="password" formControlName="password" [type]="hide ? 'password' : 'text'">
+        <mat-error *ngIf="loginForm.controls.userData.controls.password.invalid && loginForm.controls.userData.controls.password.touched">
+          <mat-error *ngIf="loginForm.controls.userData.get('password').errors?.required">
+            Password is required.
+          </mat-error>
+          <mat-error *ngIf="loginForm.controls.userData.get('password').errors?.minlength">
+            Password must be at least 2 characters long.
+          </mat-error>
+          <mat-error *ngIf="loginForm.controls.userData.get('password').errors?.maxlength">
+            Password must not exceed 255 characters.
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit"  class="login-button" [disabled]="!loginForm.valid">
+        Log in
+      </button>
+      <mat-list-item>
+        <span class="mat-error" i18n *ngIf="errorMessage">{{ errorMessage }}</span>
+      </mat-list-item>
+    </div>
+  </form>
 </div>
+
 

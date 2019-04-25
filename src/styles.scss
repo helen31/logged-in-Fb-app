@@ -3,6 +3,10 @@
 /** Include a Angular Material theme **/
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-body{
+body, html{
   margin: 0;
+  height: 100%;
+}
+.container{
+  padding-top: 40px;
 }

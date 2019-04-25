@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
 import { UserService } from '../user.service';
-import { ProfileInterface } from '../../shared/models/profile.interface';
+import { ProfileInterface, ProfileResultInterface } from '../../shared/models/profile.interface';
 import { QueryResponseInterface } from '../../shared/models/query-response.interface';
 
 @Component({
@@ -18,13 +19,29 @@ export class ProfileComponent implements OnInit, OnDestroy {
     profileDataObj;
     image: string;
     subscriptionProfile: Subscription;
+    userId: number = null;
+    user: ProfileResultInterface;
+
+    isProfileForm = false;
 
     constructor(
         private userService: UserService,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private activatedRoute: ActivatedRoute
     ) {
-        this.getCurrentUser();
+        this.activatedRoute.params.subscribe(
+            (params) => {
+                this.userId = params.id;
+            }
+        );
+        if (this.isCurrentUser()) {
+            this.getCurrentUser();
+            this.isProfileForm = true;
+        } else {
+            this.getUser(this.userId);
+        }
         this.createForm();
+
     }
 
   ngOnInit() {
@@ -45,8 +62,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-      this.subscriptionProfile.unsubscribe();
+    if (this.subscriptionProfile) {
+        this.subscriptionProfile.unsubscribe();
+    }
+
   }
+
+    isCurrentUser(): boolean {
+        return this.activatedRoute.hasOwnProperty('data') && this.activatedRoute.data['value']['currentUser'] === true ? true : false;
+    }
 
     getCurrentUser(): void {
         this.userService.getCurrentUser().subscribe(
@@ -54,6 +78,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 this.setNexProfileData(response.result);
             }, (error) => {
                 console.log(error);
+            }
+        );
+    }
+
+    getUser(id: number): void {
+        this.userService.getUser(id).subscribe(
+            (responce) => {
+                this.user = responce.result;
+                this.setNexProfileData(responce.result);
             }
         );
     }

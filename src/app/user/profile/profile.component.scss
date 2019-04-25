@@ -1,10 +1,10 @@
 .img {
   width: 300px;
   height: 300px;
-  border: 1px solid red;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #fafafa;
 }
 .img img{
   width: 100%;
@@ -12,8 +12,15 @@
 .input-field{
   padding: 5px;
 }
+.btn{
+  margin-top: 15px;
+}
 .btn-edit{
   vertical-align: middle;
   cursor: pointer;
   color: grey;
 }
+.img-description{
+  color: grey;
+}
+

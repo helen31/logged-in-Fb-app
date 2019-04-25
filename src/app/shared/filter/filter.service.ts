@@ -5,7 +5,7 @@ import {Subject} from 'rxjs';
 export class FilterService {
   private filterSource = new Subject<string>();
 
-  $filterValue = this.filterSource.asObservable();
+  filterValue$ = this.filterSource.asObservable();
 
   constructor() { }
 

@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 
 @NgModule({
@@ -20,8 +20,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     SharedModule,
     HttpClientModule,
     AppRoutingModule,
-    CoreModule,
-    FlexLayoutModule //todo Find out maybe imclude in Shared module
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,3 +1,48 @@
-<p>
-  map works!
-</p>
+<agm-map
+        #map
+        [latitude]="userLocation.lat"
+        [longitude]="userLocation.lng"
+        [zoom]="10"
+        [disableDefaultUI]="false"
+        [zoomControl]="false"><!-- (mapClick)="mapClicked($event)"-->
+
+    <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+        <agm-overlay
+                *ngFor="let item of markers | filter: 'username': searchText"
+                [latitude]="item.lat"
+                [longitude]="item.lng"
+                (markerClick)="clickedUserMarker(item.id)"><!-- [bounds] = "{x:{latitude:-0.003,longitude:-0.0052},y:{latitude:0.003,longitude:0.0052}}"-->
+            <div class="marker-body">
+                <div class="marker-body-img">
+                    <img style="width: 100%" *ngIf="!item.image" src="./assets/img/no.png">
+                    <img style="width: 100%" *ngIf="item.image" [src]="item.image" alt="img">
+                </div>
+                <div class="marker-body-info">
+                    <div>
+                        <span>{{item.first_name}}</span>
+                        <span>{{item.last_name}}</span>
+                    </div>
+                    <div>
+                        <span>{{item.country}}</span>
+                        <span>{{item.city}}</span>
+                    </div>
+                </div>
+            </div>
+        </agm-overlay>
+        <agm-marker
+                [latitude]="userLocation.lat"
+                [longitude]="userLocation.lng"><!-- (dragEnd)="markerDragEnd(m, $event)"  [markerDraggable]="m.draggable" [label]="m.label"-->
+            <agm-info-window>
+                <strong>Me</strong>
+            </agm-info-window>
+        </agm-marker>
+    </agm-marker-cluster>
+
+    <!--<agm-circle [latitude]="lat + 0.3" [longitude]="lng"-->
+              <!--[radius]="5000"-->
+              <!--[fillColor]="'red'"-->
+              <!--[circleDraggable]="true"-->
+              <!--[editable]="true">-->
+    <!--</agm-circle>-->
+
+</agm-map>

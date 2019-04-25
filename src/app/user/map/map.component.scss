@@ -1,0 +1,16 @@
+agm-map {
+  width: 100%;
+  height: calc(100vh - 64px);
+}
+.marker-body{
+  display: flex;
+  flex-direction: row;
+}
+.marker-body-img{
+  width: 50px;
+}
+.marker-body-info span{
+  margin-left: 5px;
+  font-weight: bold;
+  font-size: 13px;
+}

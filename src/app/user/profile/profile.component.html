@@ -1,35 +1,66 @@
-<div>
-  <div class="profile__img">
-    <div class="img">
-      <img [src]="image ? image : './assets/img/no.png'" alt="image">
+<div fxLayoutAlign="center" class="container">
+  <div fxLayout="column" fxFlex="80%" fxLayoutAlign="center">
+    <div fxLayout="row" fxLayoutGap="40px">
+
+      <!-- Image -->
+
+      <div>
+        <div class="img">
+          <mat-list-item class="img-description" *ngIf="!image">No image found...</mat-list-item>
+          <img *ngIf="image" [src]="image" alt="image">
+        </div>
+        <button class="btn" mat-button type="button" [ngStyle]="!isProfileForm ? { 'display': 'none'} : { 'display': 'block'}">
+          <label for="files">
+            <span class="btn-edit">Edit profile image</span>
+          </label>
+        </button>
+        <div>
+          <input id="files" type="file" accept="image/*" (change)="changeListener($event)" style="visibility:hidden;">
+        </div>
+      </div>
+
+      <div>
+
+        <!--Current user-->
+
+        <div [ngStyle]="!isProfileForm ? { 'display': 'none'} : { 'display': 'block'}">
+          <form fxLayout="column" fxLayoutGap="20px" [formGroup]="profileForm" (ngSubmit)="editProfileHandler()">
+            <mat-form-field>
+              <input matInput type="text" placeholder="First name" formControlName="first_name">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="text" placeholder="Last name" formControlName="last_name">
+            </mat-form-field>
+            <mat-radio-group fxLayout="row" fxLayoutGap="15px" formControlName="gender">
+              <mat-radio-button value="male">Male</mat-radio-button>
+              <mat-radio-button value="female">Female</mat-radio-button>
+            </mat-radio-group>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!isValidForm">
+              Edit profile
+            </button>
+          </form>
+        </div>
+
+        <!--User-->
+
+        <div [ngStyle]="isProfileForm ? { 'display': 'none'} : { 'display': 'block'}">
+          <div *ngIf="user" fxLayout="column">
+            <div fxLayout="row" fxLayoutGap="15px">
+              <mat-list-item>{{user.first_name}}</mat-list-item>
+              <mat-list-item>{{user.last_name}}</mat-list-item>
+            </div>
+            <div fxLayout="row" fxLayoutGap="15px">
+              <mat-list-item fxLayout="row" fxLayoutGap="15px">{{user.city}}</mat-list-item>
+              <mat-list-item>{{user.country}}</mat-list-item>
+            </div>
+            <div>{{user.gender}}</div>
+          </div>
+        </div>
+      </div>
+
     </div>
-    <button mat-button type="button">
-      <label for="files">
-        <span class="btn-edit">Edit profile image</span>
-      </label>
-    </button>
-    <div>
-      <input id="files" type="file" accept="image/*" (change)="changeListener($event)" style="visibility:hidden;">
-    </div>
-  </div>
-  <div class="profile__info">
-    <form [formGroup]="profileForm" (ngSubmit)="editProfileHandler()">
-      <mat-form-field>
-        <input matInput type="text" placeholder="First name" formControlName="first_name">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput type="text" placeholder="Last name" formControlName="last_name">
-      </mat-form-field>
-      <mat-radio-group formControlName="gender">
-        <mat-radio-button value="male">Male</mat-radio-button>
-        <mat-radio-button value="female">Female</mat-radio-button>
-      </mat-radio-group>
-      <button mat-raised-button color="primary" type="submit" [disabled]="!isValidForm">
-        Edit profile
-      </button>
-    </form>
-  </div>
-  <div profile__navigate>
-    <button mat-button>Go to the Map</button>
+
   </div>
 </div>
+
+

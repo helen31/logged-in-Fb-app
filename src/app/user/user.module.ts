@@ -9,6 +9,13 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserService } from './user.service';
 import { ListComponent } from './list/list.component';
 import { MapComponent } from './map/map.component';
+import { MapApiComponent } from './map-api/map-api.component';
+
+// Google Maps
+import { AgmCoreModule } from '@agm/core';
+import { AgmOverlays } from 'agm-overlays';
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+
 
 
 @NgModule({
@@ -16,12 +23,19 @@ import { MapComponent } from './map/map.component';
       ProfileComponent,
       UserLayoutComponent,
       ListComponent,
-      MapComponent],
+      MapComponent,
+      MapApiComponent],
   imports: [
       CommonModule,
       SharedModule,
-      UserRoutingModule
+      UserRoutingModule,
+      AgmOverlays,
+      AgmCoreModule.forRoot({
+          apiKey: 'AIzaSyBZ8nPw9XNQ2_C7XorPJW60ToKUMs2usng'
+      }),
+      AgmJsMarkerClustererModule
   ],
   providers: [UserService]
 })
-export class UserModule { }
+export class UserModule {
+}

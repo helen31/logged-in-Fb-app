@@ -30,7 +30,11 @@ export class AuthService {
 
   logout(): void {
     this.router.navigate(['/login']);
-    localStorage.removeItem('token'); // todo web-storage-service???
+    this.clearLcSt();
+  }
+
+  clearLcSt(): void {
+      localStorage.clear();
   }
 
 }
