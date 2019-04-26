@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="center center" class="container-login">
-  <form [formGroup]="loginForm" (ngSubmit)="loginHandler()" class="form-login">
+  <form [formGroup]="loginForm" (ngSubmit)="loginHandler()">
     <div class="form-content" formGroupName="userData" fxLayout="column" fxLayoutGap="15px">
       <button mat-button type="button" (click)="signInWithFBHandler()">Log in with Facebook</button>
       <mat-form-field>
@@ -9,7 +9,7 @@
             User is required.
           </mat-error>
           <mat-error *ngIf="loginForm.controls.userData.get('user').errors?.minlength">
-            User must be at least 4 characters long.
+            User must be at least 2 characters long.
           </mat-error>
           <mat-error *ngIf="loginForm.controls.userData.get('user').errors?.maxlength">
             User must not exceed 255 characters.
@@ -30,12 +30,13 @@
           </mat-error>
         </mat-error>
       </mat-form-field>
-      <button mat-raised-button color="primary" type="submit"  class="login-button" [disabled]="!loginForm.valid">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">
         Log in
       </button>
       <mat-list-item>
-        <span class="mat-error" i18n *ngIf="errorMessage">{{ errorMessage }}</span>
+        <span class="mat-error" *ngIf="errorMessage">{{ errorMessage }}</span>
       </mat-list-item>
+      <div><a routerLink="/sign-up" class="register">Register ?</a></div>
     </div>
   </form>
 </div>

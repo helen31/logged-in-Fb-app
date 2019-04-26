@@ -1,0 +1,53 @@
+<div fxLayout="row" fxLayoutAlign="center center" class="container-signup">
+  <form [formGroup]="signupForm" (ngSubmit)="signupHandler()">
+    <div class="form-content" formGroupName="userData" fxLayout="column" fxLayoutGap="15px">
+      <mat-form-field>
+        <input matInput placeholder="User" type="text" name="user" formControlName="username">
+        <mat-error *ngIf="signupForm.controls.userData.controls.username.invalid && signupForm.controls.userData.controls.username.touched">
+          <mat-error *ngIf="signupForm.controls.userData.get('username').errors?.required">
+            User is required.
+          </mat-error>
+          <mat-error *ngIf="signupForm.controls.userData.get('username').errors?.minlength">
+            User must be at least 2 characters long.
+          </mat-error>
+          <mat-error *ngIf="signupForm.controls.userData.get('username').errors?.maxlength">
+            User must not exceed 255 characters.
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Email" type="email" name="email" formControlName="email">
+        <mat-error *ngIf="signupForm.controls.userData.controls.email.invalid && signupForm.controls.userData.controls.email.touched">
+          <mat-error *ngIf="signupForm.controls.userData.get('email').errors?.required">
+            Email is required.
+          </mat-error>
+          <mat-error *ngIf="signupForm.controls.userData.get('email').errors?.email">
+            It is not email.
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Password" type="password" name="password" formControlName="password">
+        <mat-error *ngIf="signupForm.controls.userData.controls.password.invalid && signupForm.controls.userData.controls.password.touched">
+          <mat-error *ngIf="signupForm.controls.userData.get('password').errors?.required">
+            Password is required.
+          </mat-error>
+          <mat-error *ngIf="signupForm.controls.userData.get('password').errors?.minlength">
+            Password must be at least 6 characters long.
+          </mat-error>
+          <mat-error *ngIf="signupForm.controls.userData.get('password').errors?.maxlength">
+            Password must not exceed 255 characters.
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!signupForm.valid">
+        Sign up
+      </button>
+      <mat-list-item>
+        <span class="mat-error" i18n *ngIf="errorMessage">{{ errorMessage }}</span>
+      </mat-list-item>
+    </div>
+  </form>
+</div>
+
+

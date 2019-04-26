@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LoginLayoutComponent } from './core/login-layout/login-layout.component';
 import { MainLayoutComponent } from './core/main-layout/main-layout.component';
 import { AuthGuard } from './auth/auth.guard';
 import { PageNotFaundComponent } from './core/page-not-faund/page-not-faund.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 const routes: Routes = [
     {
@@ -14,13 +15,9 @@ const routes: Routes = [
     },
     {
         path: 'login',
-        component: LoginLayoutComponent,
-        children: [
-            { path: '',
-                loadChildren: './auth/auth.module#AuthModule'
-            }
-        ]
+        component: LoginComponent
     },
+    { path: 'sign-up', component: SignupComponent},
     {
         path: '',
         component: MainLayoutComponent,

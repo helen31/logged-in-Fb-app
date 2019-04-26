@@ -19,7 +19,7 @@ import { UserInterface } from '../../shared/models/user.interface';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  errorMessage: string = null;
+  errorMessage = '';
 
   constructor(
     private authService: AuthService,
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
           password: this.loginForm.value.userData.password.trim()
         };
 
-        this.errorMessage = null;
+        this.errorMessage = '';
 
         // 'test2test2', 'test2test'
         this.authService.login(userData).subscribe(
@@ -56,7 +56,9 @@ export class LoginComponent implements OnInit {
             },
             (error: HttpErrorResponse) => {
                 if (error.error.code === 422) {
-                    this.errorMessage = error.error.result[0].message;
+                    error.error.result.forEach(cur => {
+                        this.errorMessage += '' + cur.message;
+                    });
                     this.clearErrorMessage();
                 }
             }
@@ -74,7 +76,7 @@ export class LoginComponent implements OnInit {
 
     clearErrorMessage() {
         setTimeout(() => {
-          this.errorMessage = null;
+          this.errorMessage = '';
         }, 4000);
     }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { UserInterface } from '../shared/models/user.interface';
@@ -13,6 +13,19 @@ export class AuthService {
   login(userData: {username: string, password: string}) {
     const body = userData;
     return this.httpClient.post<UserInterface>(location.origin + '/api/v1/user/login', body);
+  }
+
+  register(userData: {username: string, email: string, password: string}) {
+    const headers = new HttpHeaders();
+    const formData = new FormData();
+
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append('Accept', 'application/json');
+    formData.append('username', userData.username);
+    formData.append('email', userData.email);
+    formData.append('password', userData.password);
+
+    return this.httpClient.post(location.origin + '/api/v1/user/register', formData, {headers});
   }
 
   setTokenToLst(token: string): void {
