@@ -11,6 +11,22 @@ import { HeaderComponent } from './header/header.component';
 import { SharedModule } from '../shared/shared.module';
 import { FilterService } from '../shared/filter/filter.service';
 
+/* Social */
+
+import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
+import { FacebookLoginProvider } from 'angularx-social-login';
+
+const config = new AuthServiceConfig([
+    {
+        id: FacebookLoginProvider.PROVIDER_ID,
+        provider: new FacebookLoginProvider('1637129439866047')
+    }
+]);
+
+export function provideConfig() {
+    return config;
+}
+
 
 @NgModule({
   declarations: [
@@ -21,11 +37,15 @@ import { FilterService } from '../shared/filter/filter.service';
   imports: [
     CommonModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    /* Social */
+    SocialLoginModule
   ],
   providers: [
     AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    /* Social */
+    { provide: AuthServiceConfig, useFactory: provideConfig },
     FilterService
   ]
 })

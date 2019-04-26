@@ -3,8 +3,14 @@ import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
+/* Social */
+
+import { AuthService as  SocialAuthService } from 'angularx-social-login';
+import { FacebookLoginProvider } from 'angularx-social-login';
+
 import { AuthService } from '../auth.service';
 import { UserInterface } from '../../shared/models/user.interface';
+
 
 @Component({
   selector: 'app-login',
@@ -15,42 +21,49 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   errorMessage: string = null;
 
-
-
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private socialAuthService: SocialAuthService
   ) {}
 
 
   ngOnInit() {
     this.createForm();
+    /* Auth FB */
+    this.socialAuthService.authState.subscribe((user) => {
+        console.log('user', user);
+    });
   }
 
-  loginHandler() {
-    const userData = {
-      username: this.loginForm.value.userData.user.trim(),
-      password: this.loginForm.value.userData.password.trim()
-    };
+    signInWithFBHandler(): void {
+        this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    }
 
-    this.errorMessage = null;
+    loginHandler() {
+        const userData = {
+          username: this.loginForm.value.userData.user.trim(),
+          password: this.loginForm.value.userData.password.trim()
+        };
 
-    // 'test2test2', 'test2test'
-    this.authService.login(userData).subscribe(
-        (responce: UserInterface) => {
-            const userCopy = Object.assign({}, responce);
+        this.errorMessage = null;
 
-            this.authService.setTokenToLst(userCopy.result.token);
-            this.router.navigate(['/user']);
-        },
-        (error: HttpErrorResponse) => {
-            if (error.error.code === 422) {
-                this.errorMessage = error.error.result[0].message;
-                this.clearErrorMessage();
+        // 'test2test2', 'test2test'
+        this.authService.login(userData).subscribe(
+            (responce: UserInterface) => {
+                const userCopy = Object.assign({}, responce);
+
+                this.authService.setTokenToLst(userCopy.result.token);
+                this.router.navigate(['/user']);
+            },
+            (error: HttpErrorResponse) => {
+                if (error.error.code === 422) {
+                    this.errorMessage = error.error.result[0].message;
+                    this.clearErrorMessage();
+                }
             }
-        }
-    );
-  }
+        );
+    }
 
     createForm(): void {
         this.loginForm = new FormGroup({
@@ -66,7 +79,5 @@ export class LoginComponent implements OnInit {
           this.errorMessage = null;
         }, 4000);
     }
-
-    logInWithFbHandler() {}
 
 }

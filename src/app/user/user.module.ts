@@ -9,7 +9,6 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserService } from './user.service';
 import { ListComponent } from './list/list.component';
 import { MapComponent } from './map/map.component';
-import { MapApiComponent } from './map-api/map-api.component';
 
 // Google Maps
 import { AgmCoreModule } from '@agm/core';
@@ -23,8 +22,8 @@ import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
       ProfileComponent,
       UserLayoutComponent,
       ListComponent,
-      MapComponent,
-      MapApiComponent],
+      MapComponent
+  ],
   imports: [
       CommonModule,
       SharedModule,

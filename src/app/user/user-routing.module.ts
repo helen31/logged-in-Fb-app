@@ -5,7 +5,6 @@ import { ProfileComponent } from './profile/profile.component';
 import { UserLayoutComponent } from './user-layout/user-layout.component';
 import { ListComponent } from './list/list.component';
 import { MapComponent } from './map/map.component';
-import { MapApiComponent } from './map-api/map-api.component';
 
 const userRoutes: Routes = [
     {path: '', component: UserLayoutComponent, children: [
