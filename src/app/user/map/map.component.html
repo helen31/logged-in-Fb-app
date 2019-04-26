@@ -1,17 +1,19 @@
 <agm-map
-        #map
-        [latitude]="userLocation.lat"
-        [longitude]="userLocation.lng"
+
+        [latitude]="50"
+        [longitude]="30"
         [zoom]="10"
         [disableDefaultUI]="false"
-        [zoomControl]="false"><!-- (mapClick)="mapClicked($event)"-->
+        [zoomControl]="false"
+        (mapReady)="onMapReady($event)"
+        (centerChange)="onMapCenterChange($event)">
 
     <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
         <agm-overlay
                 *ngFor="let item of markers | filter: 'username': searchText"
                 [latitude]="item.lat"
-                [longitude]="item.lng"
-                (markerClick)="clickedUserMarker(item.id)"><!-- [bounds] = "{x:{latitude:-0.003,longitude:-0.0052},y:{latitude:0.003,longitude:0.0052}}"-->
+                [longitude]="item.lon"
+                (markerClick)="clickedUserMarker(item.id)">
             <div class="marker-body">
                 <div class="marker-body-img">
                     <img style="width: 100%" *ngIf="!item.image" src="./assets/img/no.png">
@@ -29,20 +31,14 @@
                 </div>
             </div>
         </agm-overlay>
+
         <agm-marker
                 [latitude]="userLocation.lat"
-                [longitude]="userLocation.lng"><!-- (dragEnd)="markerDragEnd(m, $event)"  [markerDraggable]="m.draggable" [label]="m.label"-->
+                [longitude]="userLocation.lon">
             <agm-info-window>
                 <strong>Me</strong>
             </agm-info-window>
         </agm-marker>
     </agm-marker-cluster>
-
-    <!--<agm-circle [latitude]="lat + 0.3" [longitude]="lng"-->
-              <!--[radius]="5000"-->
-              <!--[fillColor]="'red'"-->
-              <!--[circleDraggable]="true"-->
-              <!--[editable]="true">-->
-    <!--</agm-circle>-->
 
 </agm-map>

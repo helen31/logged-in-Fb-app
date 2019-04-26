@@ -14,6 +14,7 @@ export class UserService {
     profile$ = this.profileSource.asObservable();
     userList$ = this.userListSource.asObservable();
 
+
     constructor(private httpClient: HttpClient) { }
 
     setNextProfileData(profileData: ProfileInterface): void {
@@ -50,6 +51,11 @@ export class UserService {
 
     deleteProfileImg() {
         return this.httpClient.delete<QueryResponseInterface>(location.origin + '/api/v1/user/profile/image');
+    }
+
+    updateUserLocation(userLocation: {lat: number, lon: number}) {
+        const body = userLocation;
+        return this.httpClient.put(location.origin + '/api/v1/user/location', body);
     }
 
     createProfileData(dataObj): any {

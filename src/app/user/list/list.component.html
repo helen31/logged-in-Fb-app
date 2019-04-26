@@ -1,7 +1,7 @@
 <div fxLayoutAlign="center" class="container">
   <div fxLayout="column" fxFlex="80%" fxLayoutAlign="center">
+    <mat-card-title>User list</mat-card-title>
     <mat-list>
-      <h3 mat-subheader>User list</h3>
       <mat-list-item *ngFor="let user of userList | filter: 'username': searchText">
         <img mat-list-icon *ngIf="!user.image" src="./assets/img/no.png">
         <img mat-list-icon *ngIf="user.image" [src]="user.image" alt="img">

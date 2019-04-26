@@ -1,10 +1,12 @@
+@import '~src/sass/variables';
+
 .img {
   width: 300px;
   height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fafafa;
+  background-color: $img-background-color;
 }
 .img img{
   width: 100%;
@@ -19,6 +21,8 @@
   vertical-align: middle;
   cursor: pointer;
   color: grey;
+  height: 100%;
+  display: inline-block;
 }
 .img-description{
   color: grey;

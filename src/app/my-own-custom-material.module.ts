@@ -8,6 +8,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   imports: [
@@ -17,8 +18,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatRadioModule,
     MatListModule,
     MatIconModule,
-    MatToolbarModule, // todo remove?
-    MatMenuModule
+    MatToolbarModule,
+    MatMenuModule,
+    MatCardModule
   ],
   exports: [
     MatInputModule,
@@ -28,7 +30,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatListModule,
     MatIconModule,
     MatToolbarModule,
-    MatMenuModule
+    MatMenuModule,
+    MatCardModule
   ]
 })
 
