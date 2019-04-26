@@ -4,13 +4,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginLayoutComponent } from './core/login-layout/login-layout.component';
 import { MainLayoutComponent } from './core/main-layout/main-layout.component';
 import { AuthGuard } from './auth/auth.guard';
+import { PageNotFaundComponent } from './core/page-not-faund/page-not-faund.component';
 
 const routes: Routes = [
-    // {
-    //     path: '',
-    //     pathMatch: 'full',
-    //     redirectTo: '/login',
-    // },
+    {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: '/login',
+    },
     {
         path: 'login',
         component: LoginLayoutComponent,
@@ -30,6 +31,7 @@ const routes: Routes = [
             }
         ]
     },
+    { path: '**', component: PageNotFaundComponent }
 ];
 
 @NgModule({

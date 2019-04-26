@@ -15,6 +15,7 @@ import { FilterService } from '../shared/filter/filter.service';
 
 import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
 import { FacebookLoginProvider } from 'angularx-social-login';
+import { PageNotFaundComponent } from './page-not-faund/page-not-faund.component';
 
 const config = new AuthServiceConfig([
     {
@@ -32,7 +33,8 @@ export function provideConfig() {
   declarations: [
     MainLayoutComponent,
     LoginLayoutComponent,
-    HeaderComponent
+    HeaderComponent,
+    PageNotFaundComponent
   ],
   imports: [
     CommonModule,

@@ -25,42 +25,40 @@ export class MapComponent implements OnInit, OnDestroy {
         lat: 51.13527,
         lng: 30.57849
     };
-    markers; // todo put a type
+    markers: ProfileInterface[];
 
-  constructor(private userService: UserService, private mapsWrapper: GoogleMapsAPIWrapper, private filterService: FilterService, private router: Router, private activatedRoute: ActivatedRoute) {
+    constructor(private userService: UserService, private mapsWrapper: GoogleMapsAPIWrapper, private filterService: FilterService, private router: Router, private activatedRoute: ActivatedRoute) {
     //this.mapsWrapper = mapsWrapper;
-    this.userService.userList$.subscribe(
-        (data: ProfileInterface[]) => {
-            let copyObg = Object.assign([], data);
-            copyObg[0]['lat'] = 50.235612;
-            copyObg[1]['lat'] = 50.265612;
-            copyObg[2]['lat'] = 50.365612;
-            copyObg[0]['lng'] = 30.234167;
-            copyObg[1]['lng'] = 30.434172;
-            copyObg[2]['lng'] = 30.444172;
+        this.userService.userList$.subscribe(
+            (data: ProfileInterface[]) => {
+                let copyObg = Object.assign([], data);
+                copyObg[0]['lat'] = 50.235612;
+                copyObg[1]['lat'] = 50.265612;
+                copyObg[2]['lat'] = 50.365612;
+                copyObg[0]['lng'] = 30.234167;
+                copyObg[1]['lng'] = 30.434172;
+                copyObg[2]['lng'] = 30.444172;
 
+                this.markers = copyObg.filter(el => typeof el.lat === 'number' && typeof el.lng === 'number' || el.lat != null || el.lng != null);
+                this.markers.length = this.markers.length - 1;
+            }
+        );
+    }
 
-            this.markers = copyObg.filter(el => typeof el.lat === 'number' && typeof el.lng === 'number' || el.lat != null || el.lng != null);
-            this.markers.length = this.markers.length - 1;
+    ngOnInit() {
+        this.subscriptionFilterValue$ = this.filterService.filterValue$.subscribe(
+            (value: string) => {
+                this.searchText = value;
+            }
+        );
+        if (this.map) {
+            this.setCurrentPosition();
         }
-    );
-  }
+    }
 
-  ngOnInit() {
-      this.subscriptionFilterValue$ = this.filterService.filterValue$.subscribe(
-          (value: string) => {
-              this.searchText = value;
-          }
-      );
-      if (this.map) {
-          this.setCurrentPosition();
-      }
-
-  }
-
-  ngOnDestroy() {
-      this.subscriptionFilterValue$.unsubscribe();
-  }
+    ngOnDestroy() {
+        this.subscriptionFilterValue$.unsubscribe();
+    }
 
     setCurrentPosition() {
         if ('geolocation' in navigator) {
@@ -68,12 +66,10 @@ export class MapComponent implements OnInit, OnDestroy {
                 this.userLocation = {lat: position.coords.latitude, lng: position.coords.longitude};
             });
         }
-
     }
 
     clickedUserMarker(id: number): void {
-      this.navigateToUserProfile(id);
-
+        this.navigateToUserProfile(id);
     }
 
     navigateToUserProfile(id: number): void {
