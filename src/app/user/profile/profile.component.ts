@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { UserService } from '../user.service';
-import { ProfileInterface, ProfileResultInterface } from '../../shared/models/profile.interface';
+import { ProfileInterface } from '../../shared/models/profile.interface';
 import { QueryResponseInterface } from '../../shared/models/query-response.interface';
 
 @Component({
@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     image: string;
     subscriptionProfile: Subscription;
     userId: number = null;
-    user: ProfileResultInterface;
+    user: ProfileInterface;
 
     isProfileForm = false;
 
@@ -74,7 +74,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     getCurrentUser(): void {
         this.userService.getCurrentUser().subscribe(
-            (response: ProfileInterface) => {
+            (response: QueryResponseInterface) => {
                 this.setNexProfileData(response.result);
             }, (error) => {
                 console.log(error);
@@ -95,7 +95,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         const profileData = this.userService.createProfileData(this.profileForm.value);
 
         this.userService.updateUser(profileData).subscribe(
-            (response: ProfileInterface) => {
+            (response: QueryResponseInterface) => {
                 this.setNexProfileData(response.result);
             },
             (error) => {
@@ -132,14 +132,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     uploadImg(file) {
         this.userService.uploadProfileImg(file).subscribe(
-            (response: ProfileInterface) => {
+            (response: QueryResponseInterface) => {
                 this.setNexProfileData(response.result);
             }
         );
     }
 
     setNexProfileData(data): void {
-        this.userService.setNextProfileData(Object.assign({}, data));
+        this.userService.setNextProfileData(data);
     }
 
     updateProfileImg(file): void {

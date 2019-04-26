@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { UserService } from '../user.service';
-import { ProfileInterface } from '../../shared/models/profile.interface';
+import { QueryResponseInterface } from '../../shared/models/query-response.interface';
+
 
 @Component({
   selector: 'app-user-layout',
@@ -10,17 +11,17 @@ import { ProfileInterface } from '../../shared/models/profile.interface';
 })
 export class UserLayoutComponent implements OnInit {
 
-  constructor(private userService: UserService) {
-      this.getUserList();
-  }
+    constructor(private userService: UserService) {
+        this.getUserList();
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
     getUserList(): void {
         this.userService.getUserList().subscribe(
-            (response: ProfileInterface) => {
-                this.userService.setNextUserListData(Object.assign([], response.result));
+        (response: QueryResponseInterface) => {
+                this.userService.setNextUserListData(response.result);
             }
         );
     }

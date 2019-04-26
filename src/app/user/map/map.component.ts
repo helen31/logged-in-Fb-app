@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MouseEvent, GoogleMapsAPIWrapper, MarkerManager } from '@agm/core';
 
 import { UserService } from '../user.service';
-import { ProfileResultInterface } from '../../shared/models/profile.interface';
+import { ProfileInterface } from '../../shared/models/profile.interface';
 import { FilterService } from '../../shared/filter/filter.service';
 
 @Component({
@@ -30,7 +30,7 @@ export class MapComponent implements OnInit, OnDestroy {
   constructor(private userService: UserService, private mapsWrapper: GoogleMapsAPIWrapper, private filterService: FilterService, private router: Router, private activatedRoute: ActivatedRoute) {
     //this.mapsWrapper = mapsWrapper;
     this.userService.userList$.subscribe(
-        (data: ProfileResultInterface[]) => {
+        (data: ProfileInterface[]) => {
             let copyObg = Object.assign([], data);
             copyObg[0]['lat'] = 50.235612;
             copyObg[1]['lat'] = 50.265612;

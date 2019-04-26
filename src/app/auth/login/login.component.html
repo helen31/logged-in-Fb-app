@@ -3,7 +3,7 @@
     <div class="form-content" formGroupName="userData" fxLayout="column" fxLayoutGap="15px">
       <button mat-button type="button" (click)="signInWithFBHandler()">Log in with Facebook</button>
       <mat-form-field>
-        <input matInput placeholder="User" text="text"  name="user" formControlName="user">
+        <input matInput placeholder="User" type="text"  name="user" formControlName="user">
         <mat-error *ngIf="loginForm.controls.userData.controls.user.invalid && loginForm.controls.userData.controls.user.touched">
           <mat-error *ngIf="loginForm.controls.userData.get('user').errors?.required">
             User is required.
@@ -17,7 +17,7 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Password" type="password" name="password" formControlName="password" [type]="hide ? 'password' : 'text'">
+        <input matInput placeholder="Password" type="password" name="password" formControlName="password">
         <mat-error *ngIf="loginForm.controls.userData.controls.password.invalid && loginForm.controls.userData.controls.password.touched">
           <mat-error *ngIf="loginForm.controls.userData.get('password').errors?.required">
             Password is required.

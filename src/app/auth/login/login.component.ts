@@ -50,10 +50,8 @@ export class LoginComponent implements OnInit {
 
         // 'test2test2', 'test2test'
         this.authService.login(userData).subscribe(
-            (responce: UserInterface) => {
-                const userCopy = Object.assign({}, responce);
-
-                this.authService.setTokenToLst(userCopy.result.token);
+            (response: UserInterface) => {
+                this.authService.setTokenToLst(response.result.token);
                 this.router.navigate(['/user']);
             },
             (error: HttpErrorResponse) => {

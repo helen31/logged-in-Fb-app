@@ -1,11 +1,4 @@
-import { QueryResponseInterface } from './query-response.interface';
-
-export interface ProfileInterface extends QueryResponseInterface {
-    result: ProfileResultInterface;
-}
-
-export interface ProfileResultInterface {
-    result: string;
+export interface ProfileInterface {
     id: number;
     username: string;
     country: string;
@@ -25,8 +18,3 @@ export interface ProfileResultInterface {
     };
 }
 
-export interface EditProfileInterface {
-    first_name: string;
-    last_name: string;
-    gender: string;
-}

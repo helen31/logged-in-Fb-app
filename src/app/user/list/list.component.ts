@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { UserService } from '../user.service';
-import { ProfileResultInterface } from '../../shared/models/profile.interface';
+import { ProfileInterface } from '../../shared/models/profile.interface';
 import { FilterService } from '../../shared/filter/filter.service';
 
 @Component({
@@ -26,7 +26,7 @@ export class ListComponent implements OnInit, OnDestroy {
           }
       );
       this.subscriptionUserList$ = this.userService.userList$.subscribe(
-          (data: ProfileResultInterface[]) => {
+          (data: ProfileInterface[]) => {
               this.userList = data;
           }
       );
