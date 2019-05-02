@@ -9,7 +9,6 @@ import { AuthService as  SocialAuthService } from 'angularx-social-login';
 import { FacebookLoginProvider } from 'angularx-social-login';
 
 import { AuthService } from '../auth.service';
-import { UserInterface } from '../../shared/models/user.interface';
 
 
 @Component({
@@ -50,8 +49,8 @@ export class LoginComponent implements OnInit {
 
         // 'test2test2', 'test2test'
         this.authService.login(userData).subscribe(
-            (response: UserInterface) => {
-                this.authService.setTokenToLst(response.result.token);
+            (response) => {
+                this.authService.setTokenToLst(response.token);
                 this.router.navigate(['/user']);
             },
             (error: HttpErrorResponse) => {

@@ -25,8 +25,8 @@ export class SignupComponent implements OnInit {
     this.errorMessage = '';
 
     this.authService.register(userData).subscribe(
-        (response: QueryResponseInterface) => {
-            this.authService.setTokenToLst(response.result.accessToken.token);
+        (response) => {
+            this.authService.setTokenToLst(response.accessToken.token);
             this.router.navigate(['/user']);
         },
         (error) => {

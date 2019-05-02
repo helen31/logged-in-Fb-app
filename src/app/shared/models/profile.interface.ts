@@ -12,9 +12,13 @@ export interface ProfileInterface {
     gender?: string;
     created_at: number;
     updated_at: number;
-    accessToken?: {
-        token: string;
-        expired_at: number;
-    };
+    token?: string;
+    accessToken?: AccessTokenInterface;
+}
+
+interface AccessTokenInterface {
+    token: string;
+    expired_at: number;
+    user_id: number;
 }
 
