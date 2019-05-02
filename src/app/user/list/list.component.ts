@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Subscription } from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 
 import { UserService } from '../user.service';
 import { ProfileInterface } from '../../shared/models/profile.interface';
@@ -12,7 +12,7 @@ import { FilterService } from '../../shared/filter/filter.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit, OnDestroy {
-    userList;
+    userList$: Observable<ProfileInterface[]>;
     searchText: string;
     subscriptionFilterValue$: Subscription;
     subscriptionUserList$: Subscription;
@@ -25,16 +25,11 @@ export class ListComponent implements OnInit, OnDestroy {
               this.searchText = value;
           }
       );
-      this.subscriptionUserList$ = this.userService.userList$.subscribe(
-          (data: ProfileInterface[]) => {
-              this.userList = data;
-          }
-      );
+      this.userList$ = this.userService.userList$;
   }
 
   ngOnDestroy() {
       this.subscriptionFilterValue$.unsubscribe();
-      this.subscriptionUserList$.unsubscribe();
   }
 
 }

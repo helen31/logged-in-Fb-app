@@ -1,7 +1,7 @@
-<div fxLayoutAlign="center" class="container">
+<div fxLayoutAlign="center start" class="container">
   <div fxLayout="column" fxFlex="80%" fxLayoutAlign="center">
     <mat-card-title>User list</mat-card-title>
-    <mat-list>
+    <mat-list *ngIf="userList$ | async as userList else loadingUsers">
       <mat-list-item *ngFor="let user of userList | filter: 'username': searchText">
         <img mat-list-icon *ngIf="!user.image" src="./assets/img/no.png">
         <img mat-list-icon *ngIf="user.image" [src]="user.image" alt="img">
@@ -9,5 +9,8 @@
         <p mat-line> {{user.country}} <span>{{user.city}}</span></p>
       </mat-list-item>
     </mat-list>
+    <ng-template #loadingUsers>
+        <app-loading></app-loading>
+    </ng-template>
   </div>
 </div>

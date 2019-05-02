@@ -6,9 +6,10 @@ import { MyOwnCustomMaterialModule } from '../my-own-custom-material.module';
 import { FilterPipe } from './filter.pipe';
 import { FilterComponent } from './filter/filter.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
-  declarations: [FilterPipe, FilterComponent],
+  declarations: [FilterPipe, FilterComponent, LoadingComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -22,7 +23,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MyOwnCustomMaterialModule,
     FilterPipe,
     FilterComponent,
-    FlexLayoutModule
+    FlexLayoutModule,
+    LoadingComponent
   ]
 })
 export class SharedModule { }
