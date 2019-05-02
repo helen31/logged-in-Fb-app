@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { ReplaySubject, Subject } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { ProfileInterface } from '../shared/models/profile.interface';
 import { QueryResponseInterface } from '../shared/models/query-response.interface';
@@ -25,8 +26,10 @@ export class UserService {
         this.userListSource.next(dataArr.slice(0));
     }
 
-    getUser(id: number) {
-        return this.httpClient.get<QueryResponseInterface>(location.origin + '/api/v1/user/' + id);
+    getUser(id: number): Observable<ProfileInterface> {
+        return this.httpClient.get(location.origin + '/api/v1/user/' + id).pipe(
+            map((response: QueryResponseInterface) => response.result)
+        );
     }
 
     getCurrentUser() {

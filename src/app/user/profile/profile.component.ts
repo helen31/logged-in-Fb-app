@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { UserService } from '../user.service';
 import { ProfileInterface } from '../../shared/models/profile.interface';
 import { QueryResponseInterface } from '../../shared/models/query-response.interface';
+import {switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -19,7 +20,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     profileDataObj;
     image: string;
     subscriptionProfile: Subscription;
-    userId: number = null;
     user: ProfileInterface;
 
     isProfileForm = false;
@@ -29,16 +29,19 @@ export class ProfileComponent implements OnInit, OnDestroy {
         private formBuilder: FormBuilder,
         private activatedRoute: ActivatedRoute
     ) {
-        this.activatedRoute.params.subscribe(
-            (params) => {
-                this.userId = params.id;
-            }
-        );
+
         if (this.isCurrentUser()) {
             this.getCurrentUser();
             this.isProfileForm = true;
         } else {
-            this.getUser(this.userId);
+            this.activatedRoute.params.pipe(
+                switchMap(params => this.userService.getUser(params.id))).subscribe(
+                (user) => {
+                    this.user = user;
+                    this.setNexProfileData(user);
+                }
+            );
+
         }
         this.createForm();
 
@@ -78,15 +81,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 this.setNexProfileData(response.result);
             }, (error) => {
                 console.log(error);
-            }
-        );
-    }
-
-    getUser(id: number): void {
-        this.userService.getUser(id).subscribe(
-            (responce) => {
-                this.user = responce.result;
-                this.setNexProfileData(responce.result);
             }
         );
     }
