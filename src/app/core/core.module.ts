@@ -16,6 +16,7 @@ import { FilterService } from '../shared/filter/filter.service';
 import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
 import { FacebookLoginProvider } from 'angularx-social-login';
 import { PageNotFaundComponent } from './page-not-faund/page-not-faund.component';
+import { PostMessageService } from './post-message.service';
 
 const config = new AuthServiceConfig([
     {
@@ -48,7 +49,8 @@ export function provideConfig() {
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     /* Social */
     { provide: AuthServiceConfig, useFactory: provideConfig },
-    FilterService
+    FilterService,
+    PostMessageService
   ]
 })
 export class CoreModule { }

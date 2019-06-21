@@ -1,0 +1,9 @@
+<div class="container">
+    <button *ngIf="!popup else closedPopup" type="button" mat-raised-button (click)="popupOpenClose()">Popup open</button>
+
+    <ng-template #closedPopup>
+        <button type="button" mat-raised-button (click)="popupOpenClose()">Popup close</button>
+    </ng-template>
+
+    <button type="submit" mat-raised-button (click)="popupFocus()">Popup focus</button>
+</div>

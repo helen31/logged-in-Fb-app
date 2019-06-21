@@ -14,6 +14,8 @@ import { MapComponent } from './map/map.component';
 import { AgmCoreModule } from '@agm/core';
 import { AgmOverlays } from 'agm-overlays';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+import { OpenerComponent } from './opener/opener.component';
+import { PopupComponent } from './popup/popup.component';
 
 
 
@@ -22,7 +24,9 @@ import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
       ProfileComponent,
       UserLayoutComponent,
       ListComponent,
-      MapComponent
+      MapComponent,
+      OpenerComponent,
+      PopupComponent
   ],
   imports: [
       CommonModule,

@@ -12,7 +12,7 @@ export class UserService {
     private profileSource = new Subject<ProfileInterface>();
     private userListSource = new ReplaySubject<ProfileInterface[]>();
 
-    profile$ = this.profileSource.asObservable();
+    profile$: Observable<ProfileInterface> = this.profileSource.asObservable();
     userList$ = this.userListSource.asObservable();
 
 
@@ -48,6 +48,7 @@ export class UserService {
     uploadProfileImg(file) {
         const formData: FormData = new FormData();
         formData.append('image', file);
+        console.log('formData---', formData);
 
         return this.httpClient.post(location.origin + '/api/v1/user/profile/image', formData);
     }
